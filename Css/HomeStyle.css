@@ -4,10 +4,37 @@
 }
 
 html {
-    font: 13px 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font: 2px 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    background: url("../Imagens/Fundo-Home.jpg") no-repeat;
+    background-size: 100vw 100vh;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+}
+
+h2 {
+    font-size: 20rem;
+    color: rgb(7, 7, 7);
+}
+
+a#btnLogin {
+    color: rgb(175, 128, 10);
+    text-decoration: none;
+    border: 2px solid rgb(175, 128, 10);
+    padding: 0.5% 9%;
+    font-size: 15rem;
+    border-radius: 10rem;
+}
+
+a:hover#btnLogin {
+    background-color: rgb(175, 128, 10);
+    color: white;
+    transition: 1s;
 }
 
 #cont {
-    min-width: 100vw;
-    min-height: 100vh;
+    background-color: rgba(243, 242, 240, 0.541);
 }
