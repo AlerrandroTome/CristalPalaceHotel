@@ -1,15 +1,30 @@
 <?php
 include_once("../Util/Connection.php");
 class LoginController{
-    public $connect = new Connection();
+    public $connect;
 
-    public function verficaDados($login, $senha){
+    public function LoginController(){
+        $this->connect = new Connection();
+    }
+
+    public function cadastrarUsuario($nome, $cpf, $login, $senha){
+        $usuario = new Usuario();
+        $query = "select * from usuario where nome='$nome' and CPF='$cpf' and Login='$login'";
+        $cont_results = mysqli_num_rows(mysqli_query($this->connect->connect(), $query));
+        if($cont_results == 0){
+            mysqli_query($this->connect->connect(),"");
+            header("location: Login.php");
+        }
+    }
+
+    public function verficaDados($login, $senha)
+    {
         $usuario = new Usuario();
         $this->connect->connect();
         $query = "Select * from usuario where login = '$login'";
         $usuario = mysqli_fetch_object(mysqli_query($this->connect->connect(),$query));
         if($usuario != null){
-            if($usuario->Senha)
+            if($usuario->Senha == $senha)
             {
                 return $usuario->Id;
             } 
@@ -24,8 +39,32 @@ class LoginController{
         }
     }
 
-    public function entrar($Id_Usuario){
-
+    public function entrar($Id_Usuario)
+    {
+        $usuario = new Usuario();
+        $this->connect->connect();
+        $query = "Select * from usuario where Id = '$Id_Usuario'";
+        $usuario = mysqli_fetch_object(mysqli_query($this->connect->connect(),$query));
+        session_start();
+        $_SESSION["usuarioLogado"] = $usuario->Id;
+        $_SESSION["usuarioAdmin"] = $usuario->Admin;
+        session_cache_expire(180);
+        if($usuario->Admin){
+            header("location: ok.php");
+        } else {
+            header("location: Hotel.php");
+        }
+    }
+    public function sair(){
+        session_unset();
+        session_destroy();
+        header("location: Home.php");
+    }
+    public function verificaUsuarioLogado()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            header("location: Home.php");
+        }
     }
 }
 ?>

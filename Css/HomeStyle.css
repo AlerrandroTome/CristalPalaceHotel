@@ -24,8 +24,9 @@ a#btnLogin {
     color: rgb(175, 128, 10);
     text-decoration: none;
     border: 2px solid rgb(175, 128, 10);
+    border-radius: 10rem;
     padding: 0.5% 9%;
-    font-size: 15rem;  
+    font-size: 15rem;
 }
 
 a:hover#btnLogin {

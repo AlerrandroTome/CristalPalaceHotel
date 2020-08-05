@@ -23,7 +23,7 @@
             </div>
 
             <div class="container pb-5" style="margin-top: 5%;">
-                <a id="btnLogin" href="#" class="font-weight-bold">Login</a>
+                <a id="btnLogin" href="Login.php" class="font-weight-bold">Login</a>
             </div>
 
         </div>
