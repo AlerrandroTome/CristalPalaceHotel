@@ -1,15 +1,15 @@
 <?php
 include_once("../Controllers/LoginController.php");
+$loginController = new LoginController();
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-	$loginController = new LoginController();
 	$error_Label = "";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($_POST["senha"] == $_POST["csenha"]) 
 	{
-		$result = $loginController->cadastrarUsuario($_POST["nome"], $_POST["cpf"], $_POST["login"], $_POST["senha"]);
+		$result = $loginController->cadastrarUsuario($_POST["nome"], $_POST["cpf"], $_POST["login"], $_POST["senha"], 0);
 
 		if ($result == "usu_cad") {
 			$error_Label = "Usuário já cadastrado.";
@@ -63,19 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						</div>
 
 						<div class="form-group">
-							<input class="form-control" type="text" placeholder="Nome" name="nome" require>
+							<input class="form-control" type="text" placeholder="Nome" name="nome" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="text" placeholder="CPF" name="cpf" require>
+							<input class="form-control" type="text" placeholder="CPF" name="cpf" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="Email" placeholder="Email" name="login" require>
+							<input class="form-control" type="Email" placeholder="Email" name="login" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Senha" name="senha" autocomplete="off" require>
+							<input class="form-control" type="password" placeholder="Senha" name="senha" autocomplete="off" required>
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Confirme a senha" name="csenha" autocomplete="off" require>
+							<input class="form-control" type="password" placeholder="Confirme a senha" name="csenha" autocomplete="off" required>
 						</div>
 						<div class="container pb-3">
 							<input type="submit" class="btn btn-primary font-weight-bolder col-4" value="Salvar">

@@ -7,21 +7,28 @@ class LoginController{
         $this->connect = new Connection();
     }
 
-    public function cadastrarUsuario($nome, $cpf, $login, $senha){
-        $usuario = new Usuario();
-        $query = "select * from usuario where nome='$nome' and CPF='$cpf' and Login='$login'";
+    public function formataCpf($value)
+    {
+        $cnpj_cpf = preg_replace("/\D/", '', $value);
+        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $cnpj_cpf);
+    }
+    
+    public function cadastrarUsuario($nome, $cpf, $login, $senha, $admin){
+        $cpf = $this->formataCpf($cpf);
+        $query = "SELECT * FROM usuario WHERE nome='$nome' OR CPF='$cpf' OR Login='$login'";
         $cont_results = mysqli_num_rows(mysqli_query($this->connect->connect(), $query));
         if($cont_results == 0){
-            mysqli_query($this->connect->connect(),"");
+            mysqli_query($this->connect->connect(),"INSERT INTO usuario (Nome, CPF, Login, 
+            Senha, Admin) VALUES ('$nome', '$cpf', '$login', '$senha', '$admin')");
             header("location: Login.php");
         }
+        return "usu_cad";
     }
 
     public function verficaDados($login, $senha)
     {
         $usuario = new Usuario();
-        $this->connect->connect();
-        $query = "Select * from usuario where login = '$login'";
+        $query = "Select * from usuario where Login = '$login'";
         $usuario = mysqli_fetch_object(mysqli_query($this->connect->connect(),$query));
         if($usuario != null){
             if($usuario->Senha == $senha)
@@ -50,7 +57,7 @@ class LoginController{
         $_SESSION["usuarioAdmin"] = $usuario->Admin;
         session_cache_expire(180);
         if($usuario->Admin){
-            header("location: ok.php");
+            header("location: Admin.php");
         } else {
             header("location: Hotel.php");
         }
