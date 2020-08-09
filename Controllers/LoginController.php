@@ -49,13 +49,14 @@ class LoginController{
     public function entrar($Id_Usuario)
     {
         $usuario = new Usuario();
-        $this->connect->connect();
         $query = "Select * from usuario where Id = '$Id_Usuario'";
         $usuario = mysqli_fetch_object(mysqli_query($this->connect->connect(),$query));
         session_start();
         $_SESSION["usuarioLogado"] = $usuario->Id;
         $_SESSION["usuarioAdmin"] = $usuario->Admin;
+        
         session_cache_expire(180);
+
         if($usuario->Admin){
             header("location: Admin.php");
         } else {

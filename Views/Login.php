@@ -2,9 +2,8 @@
 include_once("../Controllers/LoginController.php");
 include_once("../Entities/Usuario.php");
 include_once("../Models/LoginModel.php");
-include_once("../Util/UsuarioLogado.php");
+
 $loginController = new LoginController();
-$usuarioLogado = new UsuarioLogado();
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
     $usuario = new Usuario();
     $login_Label = "";

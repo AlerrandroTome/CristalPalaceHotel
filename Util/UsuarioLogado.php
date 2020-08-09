@@ -1,5 +1,7 @@
 <?php
 include_once("Connection.php");
+include_once("../Controllers/LoginController.php");
+
 class UsuarioLogado{
     public $nome;
     public $id;
@@ -7,14 +9,17 @@ class UsuarioLogado{
     public $admin;
 
     public function UsuarioLogado(){
-        session_start();
         $connect = new Connection();
-        $id = (int)$_SESSION["usuarioLogado"];
-        $usuario = mysqli_fetch_object(mysqli_query($connect->connect(), "SELECT * FROM usuario WHERE Id = '$id'"));
+        $u = new LoginController();
+        $u->verificaUsuarioLogado();
 
-        $this->nome = $usuario->Nome;
-        $this->id = $usuario->Id;
-        $this->login = $usuario->Login;
-        $this->admin = $usuario->Admin;
+        $id = (int)$_SESSION["usuarioLogado"];
+        $usuario = mysqli_fetch_array(mysqli_query($connect->connect(), "SELECT * FROM usuario WHERE Id = '$id'"));
+
+        $this->nome = $usuario["Nome"];
+        $this->id = $usuario["Id"];
+        $this->login = $usuario["Login"];
+        $this->admin = $usuario["Admin"];
+        
     }
 }
