@@ -89,8 +89,8 @@ class AdminController{
         mysqli_query($this->connect->connect(), $query);
     }
 
-    public function listaStatusQuarto(){
-        return mysqli_query($this->connect->connect(), "SELECT * FROM statusquarto");
+    public function listaStatusQuarto($id){
+        return mysqli_query($this->connect->connect(), "SELECT * FROM statusquarto WHERE Id != '$id'");
     }
 
     public function alterarStatusQuarto($id_quarto, $id_status){
@@ -107,7 +107,7 @@ class AdminController{
         date_default_timezone_set('America/Sao_Paulo');
         $dataConfirmacao = (string)date('d/m/Y H:i:s');
         $status = mysqli_fetch_object(mysqli_query($this->connect->connect(), "SELECT * 
-        FROM statuspedido WHERE Nome = Confirmado"));
+        FROM statuspedido WHERE Nome = 'Confirmado'"));
 
         mysqli_query($this->connect->connect(), "UPDATE pedido SET 
         DataHoraConfirmacao = '$dataConfirmacao', StatusPedido_Id = '$status->Id' WHERE Id = '$id'");

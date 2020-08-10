@@ -66,7 +66,7 @@ class LoginController{
     public function sair(){
         session_unset();
         session_destroy();
-        header("location: Home.php");
+        header("location: ../Views/Home.php");
     }
     public function verificaUsuarioLogado()
     {
