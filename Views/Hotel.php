@@ -5,7 +5,7 @@ include_once("../Controllers/LoginController.php");
   //$login->verificaUsuarioLogado();
 ?> 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
