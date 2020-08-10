@@ -1,6 +1,7 @@
 <?PHP
 include_once("../Controllers/LoginController.php"); 
 include_once("../Util/UsuarioLogado.php");
+session_start();
 $usuarioLogado = new UsuarioLogado();
 $login="";
 ?> 
