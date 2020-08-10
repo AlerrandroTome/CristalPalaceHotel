@@ -47,13 +47,13 @@ $usuarioLogado = new UsuarioLogado();
                 </ul>
             </div>
             <div class="col-3">
-                <h4 class="h4" style="color: white;">
+                <h5 class="h5" style="color: white;">
                 <img src="../Imagens/Usuario-Icone.svg" width="10%" height="10%">
                     <?php
                     echo $usuarioLogado->nome;
                     ?>
                     <a href="../ViewController/Sair-AdminController.php" class="h5 text-danger">Sair</a>
-                </h4>
+                </h5>
             </div>
         </nav>
     </div>
@@ -66,7 +66,7 @@ $usuarioLogado = new UsuarioLogado();
             <div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-hover table-striped table-responsive" style="margin-left: 10%">
+                        <table class="table table-hover table-striped table-responsive" style="margin-left: auto">
                             <thead>
                                 <tr role="row" style="width: 100%;">
                                     <th>Cliente</th>

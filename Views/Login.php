@@ -13,14 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"){
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $result = $loginController->verficaDados($_POST["login"], $_POST["senha"]);
+    $result = $loginController->verficaDados(addslashes($_POST["login"]), addslashes($_POST["senha"]));
     
     if ($result == "error_user") {
-        $login = new LoginModel($_POST["login"], $_POST["senha"], "Usuário não encontrado.", "");
+        $login = new LoginModel(addslashes($_POST["login"]), addslashes($_POST["senha"]), "Usuário não encontrado.", "");
     } 
     elseif ($result == "error_senha") 
     {
-        $login = new LoginModel($_POST["login"], $_POST["senha"], "", "Senha Incorreta.");
+        $login = new LoginModel(addslashes($_POST["login"]), addslashes($_POST["senha"]), "", "Senha Incorreta.");
     } 
     else 
     {

@@ -1,8 +1,8 @@
 <?PHP
 include_once("../Controllers/LoginController.php"); 
-  $login="";
- // $login= new LoginController();
-  //$login->verificaUsuarioLogado();
+include_once("../Util/UsuarioLogado.php");
+$usuarioLogado = new UsuarioLogado();
+$login="";
 ?> 
 <!DOCTYPE html>
 <html lang="pt-br">

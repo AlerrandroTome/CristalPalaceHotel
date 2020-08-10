@@ -10,8 +10,8 @@ class AdminController{
     }
 
     public function listarUsuarios(){
-        /*$id_usuLog = $this->usuarioLog->id;*/
-        $id_usuLog = 8;
+        $usuarioLog = new UsuarioLogado(); 
+        $id_usuLog = $usuarioLog->id;
         $query = "SELECT * FROM usuario WHERE Id != '$id_usuLog'";
         return mysqli_query($this->connect->connect(), $query);
     }

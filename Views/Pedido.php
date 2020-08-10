@@ -2,19 +2,18 @@
 include_once("../Controllers/PedidoController.php");
 include_once("../Controllers/LoginController.php");
 include_once("../Controllers/QuartoController.php");
+include_once("../Util/UsuarioLogado.php");
+$usuarioLogado = new UsuarioLogado();
 $cont = new QuartoController();
 $quartos = $cont->quartoDisponivel();
-// $login="";
-//$login= new LoginController();
-//$login->verificaUsuarioLogado();
-//$loginController = new LoginController();
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $pedidoController = new PedidoController();
-    $DataHoraPedido = new DateTime();
-    $data = $DataHoraPedido->format('Y-m-d H:i:s');
+    date_default_timezone_set('America/Sao_Paulo');
+    $DataHoraPedido = (string)date('d/m/Y H:i:s');
     $ValorDiaria = $cont->localizarQuarto($_POST["Quarto"]);
     $ValorTotal = $pedidoController->valorTotal($ValorDiaria,$_POST["data_fim"],$_POST["data_inicio"]);
-    $pedidoController->cadastrarPedido($_POST["Quarto"],$_POST["data_fim"],NULL,$_POST["data_inicio"],$data,$ValorTotal);
+    $pedidoController->cadastrarPedido($_POST["Quarto"],$_POST["data_fim"],NULL,$_POST["data_inicio"],$DataHoraPedido,$ValorTotal);
 }
 ?>
 
