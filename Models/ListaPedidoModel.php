@@ -11,8 +11,9 @@
         public $Confirmacao;
         public $Valor;
 
-        public function ListaPedidoModel($Id, $StatusPedido, $QuartoNumero, 
+        public function ListaPedidoModel($IdQuarto,$Id, $StatusPedido, $QuartoNumero, 
         $InicioEstadia, $FimEstadia, $Pedido, $Valor,$Confirmacao){
+            $this->IdQuarto = $IdQuarto;
             $this->Id = $Id;
             $this->StatusPedido = $StatusPedido;
             $this->QuartoNumero = $QuartoNumero;

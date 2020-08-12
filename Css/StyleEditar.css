@@ -9,12 +9,14 @@ body {
     height: 100%;
     align-self: center;
 }
+
 .navbar {
     background:rgb(0, 0, 0,0.541);   
     font-family: "Sofia"; color: white;
     text-align: center;
     font-size: large;
 }
+
 #cont {
     background-color: rgba(243, 242, 240, 0.54);
 }
@@ -28,10 +30,10 @@ body {
     text-decoration: none;
     border: 2px solid #a9a9a9;
     padding: 1% 15%;
-    font-size: 1.2rem;  
+    font-size: 1.5rem;  
     background-color: transparent;
     color: black;
-    margin-top: 30px;
+    margin-top: 35px;
 }
 .btnPedido:hover {
     text-decoration: none;
@@ -43,4 +45,3 @@ body {
     cursor: pointer;
     font-weight:bold;
 }
-

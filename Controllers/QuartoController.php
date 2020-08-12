@@ -46,10 +46,10 @@ class QuartoController
   public function localizarQuarto($Id)
   {
     $connect = $this->connect->connect();
-    $resultado = mysqli_fetch_assoc(mysqli_query($this->connect->connect(), "SELECT ValorDiaria 
-    FROM quarto WHERE Id = '$Id'"));
-    $Diaria = $resultado["ValorDiaria"];
-    return $Diaria;
+    $Diaria = mysqli_fetch_object(mysqli_query($this->connect->connect(), "SELECT * 
+    FROM quarto WHERE Id_quarto = '$Id'"));
+    $diaria=$Diaria->ValorDiaria;
+    return $diaria;
   }
   public function quartoDisponivel()
   {
@@ -58,7 +58,6 @@ class QuartoController
     FROM statusquarto WHERE Nome = 'Livre'"));
     $query = "SELECT * from quarto where StatusQuarto_Id = '$status->Id'";
     $pedidos = mysqli_query($this->connect->connect(), $query);
-
     return $pedidos;
   }
 }
