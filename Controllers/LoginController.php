@@ -64,13 +64,14 @@ class LoginController{
         }
     }
     public function sair(){
+        session_start().
         session_unset();
         session_destroy();
         header("location: ../Views/Home.php");
     }
     public function verificaUsuarioLogado()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
+        if (!isset($_SESSION["usuarioLogado"])) {
             header("location: Home.php");
         }
     }

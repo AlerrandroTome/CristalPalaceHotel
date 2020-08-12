@@ -1,9 +1,9 @@
 <?PHP
 include_once("../Controllers/LoginController.php"); 
 include_once("../Util/UsuarioLogado.php");
-  //$login="";
-  //$login= new LoginController();
-  //$login->verificaUsuarioLogado();
+  $login="";
+  $login= new LoginController();
+  $login->verificaUsuarioLogado();
   session_start();
   $usuarioLogado = new UsuarioLogado();
   $id_usuario=$_SESSION["usuarioLogado"]; 

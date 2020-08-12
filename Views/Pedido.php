@@ -14,13 +14,11 @@ $id_usuario=$_SESSION["usuarioLogado"];
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     date_default_timezone_set('America/Sao_Paulo');
     $pedidoController = new PedidoController();
-    $DataHoraPedido = new DateTime();
-    $Id_quarto =  $_GET["Quarto"];
-    $data = $DataHoraPedido->format('Y-m-d H:i:s');
-    $ValorDiaria = $cont->localizarQuarto($Id_quarto);
+    date_default_timezone_set('America/Sao_Paulo');
+    $DataHoraPedido = (string)date('d/m/Y H:i:s');
+    $ValorDiaria = $cont->localizarQuarto($_POST["Quarto"]);
     $ValorTotal = $pedidoController->valorTotal($ValorDiaria,$_POST["data_fim"],$_POST["data_inicio"]);
-   // echo $ValorTotal;
-    $pedidoController->cadastrarPedido($id_usuario,$Id_quarto,$_POST["data_fim"],NULL,$_POST["data_inicio"],$data,$ValorTotal);
+    $pedidoController->cadastrarPedido($_POST["Quarto"],$_POST["data_fim"],NULL,$_POST["data_inicio"],$DataHoraPedido,$ValorTotal);
 }
 ?>
 

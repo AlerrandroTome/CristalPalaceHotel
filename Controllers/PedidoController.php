@@ -7,7 +7,7 @@
     public $connect;
     public $Valor_total;
     public $DataHoraPedido;
-    public int $intervalo_dias;
+    public $intervalo_dias;
     public function __construct()
     {
       $this->connect=new Connection();
@@ -39,10 +39,11 @@
      if( $dataInicioEstadia>$dataFimEstadia || $dataInicioEstadia<$DataHoraPedido || $dataFimEstadia < $DataHoraPedido){
      }
      else{ 
+     $id_usuario = $_SESSION["usuarioLogado"] ;
      $status = mysqli_fetch_object(mysqli_query($this->connect->connect(), "SELECT * 
      FROM statuspedido WHERE Nome = 'Solicitado'"));
-     $sql = "INSERT INTO pedido (Quarto_Id,DataHoraPedido,Cliente_Id,StatusPedido_Id,
-     DataInicioEstadia,DataFimEstadia,ValorTotal,DataHoraConfirmacao,Alteracao) VALUES ('$quarto_Id','$DataHoraPedido','$id_usuario','$status->Id','$dataInicioEstadia', '$dataFimEstadia','$Valor_total', NULL,1)";
+     $sql = "INSERT INTO pedido (Quarto_Id, DataHoraPedido, Cliente_Id, StatusPedido_Id,
+     DataInicioEstadia, DataFimEstadia, ValorTotal, DataHoraConfirmacao) VALUES ('$quarto_Id','$DataHoraPedido','$id_usuario','$status->Id','$dataInicioEstadia', '$dataFimEstadia', '$Valor_total', NULL)";
      if (mysqli_query($this->connect->connect(),$sql) === TRUE) {
        header("location: ../Views/Hotel.php");
       echo "success";

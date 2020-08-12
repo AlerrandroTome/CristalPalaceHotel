@@ -27,7 +27,7 @@ $usuarioLogado = new UsuarioLogado();
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Alternar de navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse" id="navbarColor01">
+            <div class="navbar-collapse collapse col-9" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li id="nav-admin" class="nav-item">
                         <a class="nav-link" href="Admin.php">
@@ -47,13 +47,13 @@ $usuarioLogado = new UsuarioLogado();
                 </ul>
             </div>
             <div class="col-3">
-                <h4 class="h4" style="color: white;">
+                <h5 class="h5" style="color: white;">
                 <img src="../Imagens/Usuario-Icone.svg" width="10%" height="10%">
                     <?php
                     echo $usuarioLogado->nome;
                     ?>
                     <a href="../ViewController/Sair-AdminController.php" class="h5 text-danger">Sair</a>
-                </h4>
+                </h5>
             </div>
         </nav>
     </div>
@@ -72,6 +72,8 @@ $usuarioLogado = new UsuarioLogado();
                                     <th>Numero</th>
                                     <th>Valor da Diária</th>
                                     <th>Status</th>
+                                    <th></th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
