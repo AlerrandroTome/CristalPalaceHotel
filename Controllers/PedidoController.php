@@ -11,7 +11,6 @@
     public function __construct()
     {
       $this->connect=new Connection();
-      //$this->DataHoraPedido = new DateTime();
       $this->connect->connect();
     }
     public function valorTotal($valorDiaria,$dataFimEstadia,$dataInicioEstadia){
@@ -23,9 +22,7 @@
       $periodo = new DatePeriod($inicio, $intervalo ,$fim);
       foreach($periodo as $date){
         $intervalo_dias++;
-        }
-        //echo $intervalo_dias;
-        //echo $valorDiaria;
+      }
       $Valor_total = $intervalo_dias*($valorDiaria); 
       return $Valor_total;    
     }
@@ -45,7 +42,7 @@
      $sql = "INSERT INTO pedido (Quarto_Id, DataHoraPedido, Cliente_Id, StatusPedido_Id,
      DataInicioEstadia, DataFimEstadia, ValorTotal, DataHoraConfirmacao) VALUES ('$quarto_Id','$DataHoraPedido','$id_usuario','$status->Id','$dataInicioEstadia', '$dataFimEstadia', '$Valor_total', NULL)";
      if (mysqli_query($this->connect->connect(),$sql) === TRUE) {
-       header("location: ../Views/Hotel.php");
+       header("location: ../Views/Pedido.php");
       echo "success";
     } else {
       echo "Error: " . $this->connect->error;
@@ -58,10 +55,10 @@
       $pedido = new ArrayObject();
       $sql="SELECT * FROM ((pedido INNER JOIN quarto ON quarto.Id_quarto = pedido.Quarto_Id) 
       INNER JOIN statuspedido ON statuspedido.Id = pedido.StatusPedido_Id)
-      WHERE Id_pedido='2' ORDER By pedido.DataHoraPedido DESC";
+      WHERE Id_pedido='$Id' ORDER By pedido.DataHoraPedido DESC";
       $query = mysqli_query($this->connect->connect(), $sql);
       $pedido_banco = $query->fetch_array();
-      $listapedidoModel = new ListaPedidoModel($pedido_banco["Id_quarto"],$pedido_banco["Id_pedido"], $pedido_banco["Nome"],$pedido_banco["Numero"], 
+      $listapedidoModel = new ListaPedidoModel($pedido_banco["Quarto_Id"],$pedido_banco["Id_pedido"], $pedido_banco["Nome"],$pedido_banco["Numero"], 
       $pedido_banco["DataInicioEstadia"], $pedido_banco["DataFimEstadia"], 
       $pedido_banco["DataHoraPedido"], $pedido_banco["ValorTotal"], $pedido_banco["DataHoraConfirmacao"]);
       $pedido->append($listapedidoModel);
@@ -86,14 +83,17 @@
     }
       
       public function alterarPedido($pedidoId,$dataInicioEstadia,$dataFimEstadia,$quarto_Id){
-     // $Valor = new PedidoController();
       $diaria = new QuartoController();
       $diaria = $diaria->localizarQuarto($quarto_Id);
       $Valor_total = $this->valorTotal($diaria,$dataFimEstadia,$dataInicioEstadia);
-      //echo $Valor_total;
       $status = mysqli_fetch_object(mysqli_query($this->connect->connect(), "SELECT * 
       FROM statuspedido WHERE Nome = 'Solicitado'"));
-      $sql="UPDATE pedido SET StatusPedido_Id = '$status->Id', DataInicioEstadia='$dataInicioEstadia' 
+      echo $status->Id;
+      echo $dataInicioEstadia;
+      echo $dataFimEstadia;
+      echo $Valor_total;
+      echo $quarto_Id;
+      $sql="UPDATE pedido SET StatusPedido_Id = '$status->Id', DataInicioEstadia='$dataInicioEstadia',
       DataFimEstadia='$dataFimEstadia', ValorTotal='$Valor_total', Quarto_Id ='$quarto_Id', Alteracao = 1
       WHERE Id_pedido='$pedidoId'";
        if (mysqli_query($this->connect->connect(),$sql) === TRUE) {

@@ -45,3 +45,9 @@ body {
     cursor: pointer;
     font-weight:bold;
 }
+@media (max-width: 768px) {
+    div #cont
+     {
+      background-color: yellow;
+    }
+  }

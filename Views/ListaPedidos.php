@@ -28,38 +28,38 @@ $usuarioLogado = new UsuarioLogado();
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid text-center">
         <div class="row mt-2 justify-content-center">
             <div class="col-sm-4 col-lg-4">
                 <a class="ml-auto mr-auto col-lg-4 justify-content-center" style="color:black; font-family:Cormorant Garamond; font-size:3.5em"> Cristal Palace</a>
             </div>
         </div>
     </div>
-    <nav class="navbar transparent navbar-expand-lg  navbar">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg  navbar-light">
+  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <div class="collapse navbar-collapse" id="#navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" style="color:white; font-family:Lora; font-size:18px" href="../Views/Hotel.php">Home </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" style="color:white; font-family:Lora; font-size:18px" href="#">Meus Pedidos<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-            <div class="col-4">
-                <a style="color: white;font-size:21px ">
+  <div class="collapse navbar-collapse  " id="navbarSupportedContent">
+    <ul class="navbar-nav  ml-0">
+      <li class="nav-item active ml-0 ">
+      <a class="nav-link " style="color:white; font-family:Lora; font-size:18px" href="../Views/Hotel.php">Home</a>
+      </li>
+      <li class="nav-item ml-0 ">
+      <a class="nav-link" style="color:white; font-family:Lora; font-size:18px" href="../Views/ListaPedidos.php">Meus Pedidos</a>
+      </li>
+      </ul>  
+      <div class="col-10 text-right">
+                <a class="h4 " style="color: white;font-size:21px ">
                     <?php
-                    echo "Seja bem-vindo(a), " . $usuarioLogado->nome;
+                    echo "Seja bem-vindo(a), " .$usuarioLogado->nome;
                     ?>
                     <a href="../ViewController/Sair-Usuario.php" class="h5 text-danger"> / Sair</a>
-                </a>
-            </div>
-        </div>
-    </nav>
-    <div class="container-fluid">
+                 </a>
+            </div>      
+     </div>         
+</nav>
+    <div class="container-fluid text-center">
         <div class="row mt-5 justify-content-center">
             <div class="col-sm-4 col-lg-3 mr-auto ml-auto">
                 <h1>Meus pedidos</h1>
@@ -67,7 +67,7 @@ $usuarioLogado = new UsuarioLogado();
         </div>
     </div>
     <div>
-        <div class="row mt-8">
+        <div class="row mt-9">
             <div class="col-sm-12 ml-auto mr-auto col-lg-7">
                 <table class="table table-hover table-striped table-responsive ml-auto mr-auto" style="margin-left: 10%">
                     <thead>
@@ -96,7 +96,7 @@ $usuarioLogado = new UsuarioLogado();
                                     $data_atual = new DateTime();
                                     if ($pedidos->InicioEstadia < $data_atual) :
                                     ?>
-                                        <a class="btn btn-outline-danger font-weight-bold" href="../ViewController/ExcluirPedidoViewController.php?id=<?php echo $pedidos->Id ?>&data_inicio=<?php echo $pedidos->InicioEstadia ?>">Excluir</a>
+                                        <a class="btn btn-outline-danger font-weight-bold" href="../ViewController/ExcluirPedidoViewController.php?id=<?php echo $pedidos->Id ?>&data_inicio=<?php echo $pedidos->InicioEstadia ?>">Cancelar</a>
                                 </td>
                                 <td>
                                     <a class="btn btn-outline-primary font-weight-bold" href="../Views/EditaPedido.php?id=<?php echo $pedidos->Id ?>&data_inicio=<?php echo $pedidos->InicioEstadia ?>&data_fim=<?php echo $pedidos->FimEstadia ?>">Alterar</a>

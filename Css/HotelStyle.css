@@ -9,9 +9,8 @@ body {
     height: 100%;
     align-self: center;
 }
-
 .navbar {
-    background:rgb(0, 0, 0,0.541);   
+    background:rgb(0, 0, 0,0.5);   
     font-family: "Sofia"; color: white;
     text-align: center;
     font-size: large;
@@ -37,3 +36,18 @@ a:hover#btnLogin {
     font-family: "Cormorant Garamond";
     font-size: 40px;
 }
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    div#cont{
+        font-size: 100px;
+        padding: 5%, 8%;
+        background-color: yellow;
+    }
+}
+@media only screen and (max-width: 479px) {
+    div#cont{
+        font-size: 15px;
+        padding: 5%, 3%;
+    }
+}
+
