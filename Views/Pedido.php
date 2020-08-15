@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <?php
                             while ($quarto = $quartos->fetch_array()) {
                             ?>
-                                <option value="<?php echo $quarto["Id_quarto"] ?>"><?php echo "" . $quarto["Numero"] . " - " . $quarto["ValorDiaria"] . "" ?></option>
+                                <option value="<?php echo $quarto["Id"] ?>"><?php echo "" . $quarto["Numero"] . " - " . $quarto["ValorDiaria"] . "" ?></option>
                             <?php
                             }
                             ?>

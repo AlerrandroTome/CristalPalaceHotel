@@ -81,11 +81,11 @@ $usuarioLogado = new UsuarioLogado();
                 <option value="<?php echo $pedido->IdQuarto ?>"><?php echo "" . $pedido->QuartoNumero . " - " . $cont->localizarQuarto($pedido->IdQuarto) . "" ?></option>
                 <?php
                 while ($quarto = $quartos->fetch_array()) {
-                  (int) $quarto_recebido = $quarto["Id_quarto"];
+                  (int) $quarto_recebido = $quarto["Id"];
                   (int) $quarto_alterar = $pedido->IdQuarto;
                   if ($quarto_recebido == $quarto_alterar) {
                   } else { ?>
-                    <option value="<?php echo $quarto["Id_quarto"] ?>"><?php echo "" . $quarto["Numero"] . " - " . $quarto["ValorDiaria"] . "" ?></option>
+                    <option value="<?php echo $quarto["Id"] ?>"><?php echo "" . $quarto["Numero"] . " - " . $quarto["ValorDiaria"] . "" ?></option>
                 <?php
                   }
                 }

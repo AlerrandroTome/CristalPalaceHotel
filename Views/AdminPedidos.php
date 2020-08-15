@@ -1,11 +1,13 @@
 <?php
 include_once("../Controllers/LoginController.php");
 include_once("../Controllers/AdminController.php");
+include_once("../Controllers/PedidoController.php");
 include_once("../Util/UsuarioLogado.php");
 $admin = new AdminController();
-session_start();
+//session_start();
 $pedidos = $admin->listarTodosPedidos();
 $usuarioLogado = new UsuarioLogado();
+$pedidoController = new PedidoController();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -90,8 +92,8 @@ $usuarioLogado = new UsuarioLogado();
                                         <td><?php echo $pedido->QuartoNumero ?></td>
                                         <td><?php echo $pedido->Pedido ?></td>
                                         <td><?php echo $pedido->Confirmacao ?></td>
-                                        <td><?php echo $pedido->InicioEstadia ?></td>
-                                        <td><?php echo $pedido->FimEstadia ?></td>
+                                        <td><?php echo $pedidoController->formatarData($pedido->InicioEstadia) ?></td>
+                                        <td><?php echo $pedidoController->formatarData($pedido->FimEstadia) ?></td>
                                         <td><?php echo $pedido->Valor ?></td>
                                         <td><?php echo $pedido->StatusNome ?></td>
                                         <td><?php echo $pedido->Confirmado == true ? "" : "<a class='btn btn-outline-primary font-weight-bold' href='../ViewController/AP-AdminController.php?id=" . $pedido->Id . "&a=1'>Confirmar</a>"; ?></td>
