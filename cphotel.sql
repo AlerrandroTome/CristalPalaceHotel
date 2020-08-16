@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Ago-2020 às 01:06
--- Versão do servidor: 10.4.13-MariaDB
--- versão do PHP: 7.2.31
+-- Tempo de geração: 17-Ago-2020 às 00:20
+-- Versão do servidor: 10.4.11-MariaDB
+-- versão do PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `cphotel`
 --
-CREATE DATABASE IF NOT EXISTS `cphotel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `cphotel`;
 
 -- --------------------------------------------------------
 
@@ -29,41 +27,28 @@ USE `cphotel`;
 -- Estrutura da tabela `pedido`
 --
 
-DROP TABLE IF EXISTS `pedido`;
 CREATE TABLE `pedido` (
   `Id` int(11) NOT NULL,
   `Quarto_Id` int(11) NOT NULL,
-  `DataHoraPedido` varchar(30) NOT NULL,
-  `DataHoraConfirmacao` varchar(30) CHARACTER SET utf8 DEFAULT NULL,
+  `DataHoraPedido` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `DataHoraConfirmacao` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `Cliente_Id` int(11) NOT NULL,
   `StatusPedido_Id` int(11) NOT NULL,
   `DataInicioEstadia` date NOT NULL,
   `DataFimEstadia` date NOT NULL,
-  `ValorTotal` float NOT NULL
+  `ValorTotal` float NOT NULL,
+  `Alteracao` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELACIONAMENTOS PARA TABELAS `pedido`:
---   `StatusPedido_Id`
---       `statuspedido` -> `Id`
---   `Cliente_Id`
---       `usuario` -> `Id`
---   `Quarto_Id`
---       `quarto` -> `Id`
---
 
 --
 -- Extraindo dados da tabela `pedido`
 --
 
-INSERT INTO `pedido` (`Id`, `Quarto_Id`, `DataHoraPedido`, `DataHoraConfirmacao`, `Cliente_Id`, `StatusPedido_Id`, `DataInicioEstadia`, `DataFimEstadia`, `ValorTotal`) VALUES
-(3, 1, '2020-08-10', '10/08/2020 19:27:35', 1, 2, '2020-08-10', '2020-08-11', 100.99),
-(4, 1, '2020-08-10', '', 1, 1, '2020-08-11', '2020-08-12', 100.99),
-(6, 3, '2020-08-10', '', 1, 1, '2020-08-11', '2020-08-14', 600),
-(7, 3, '2020-08-10', NULL, 1, 1, '2020-08-11', '2020-08-14', 600),
-(8, 3, '2020-08-10', NULL, 1, 1, '2020-08-11', '2020-08-13', 400),
-(9, 3, '2020-08-10', NULL, 1, 1, '2020-08-11', '2020-08-13', 400),
-(10, 3, '2020-08-10', NULL, 1, 1, '2020-08-11', '2020-08-14', 600);
+INSERT INTO `pedido` (`Id`, `Quarto_Id`, `DataHoraPedido`, `DataHoraConfirmacao`, `Cliente_Id`, `StatusPedido_Id`, `DataInicioEstadia`, `DataFimEstadia`, `ValorTotal`, `Alteracao`) VALUES
+(21, 3, '15/08/2020 20:43:08', NULL, 4, 1, '2020-08-20', '2020-08-22', 400, 0),
+(23, 4, '16/08/2020 19:00:02', NULL, 6, 1, '2020-08-24', '2020-08-26', 600, 0),
+(24, 3, '16/08/2020 19:01:23', NULL, 5, 1, '2020-08-29', '2020-08-30', 200, 0),
+(25, 10, '16/08/2020 19:12:57', NULL, 7, 1, '2020-08-31', '2020-09-02', 640, 0);
 
 -- --------------------------------------------------------
 
@@ -71,7 +56,6 @@ INSERT INTO `pedido` (`Id`, `Quarto_Id`, `DataHoraPedido`, `DataHoraConfirmacao`
 -- Estrutura da tabela `quarto`
 --
 
-DROP TABLE IF EXISTS `quarto`;
 CREATE TABLE `quarto` (
   `Id` int(11) NOT NULL,
   `Numero` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -80,19 +64,19 @@ CREATE TABLE `quarto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELACIONAMENTOS PARA TABELAS `quarto`:
---   `StatusQuarto_Id`
---       `statusquarto` -> `Id`
---
-
---
 -- Extraindo dados da tabela `quarto`
 --
 
 INSERT INTO `quarto` (`Id`, `Numero`, `ValorDiaria`, `StatusQuarto_Id`) VALUES
-(1, '104', 100.99, 1),
+(1, '104', 100.99, 2),
 (3, '105', 200, 1),
-(4, '106', 150, 1);
+(4, '103', 300, 1),
+(5, '101', 500, 1),
+(6, '102', 600, 1),
+(7, '106', 250, 1),
+(8, '108', 350, 1),
+(9, '109', 380, 1),
+(10, '110', 320, 3);
 
 -- --------------------------------------------------------
 
@@ -100,15 +84,10 @@ INSERT INTO `quarto` (`Id`, `Numero`, `ValorDiaria`, `StatusQuarto_Id`) VALUES
 -- Estrutura da tabela `statuspedido`
 --
 
-DROP TABLE IF EXISTS `statuspedido`;
 CREATE TABLE `statuspedido` (
   `Id` int(11) NOT NULL,
   `Nome` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELACIONAMENTOS PARA TABELAS `statuspedido`:
---
 
 --
 -- Extraindo dados da tabela `statuspedido`
@@ -124,15 +103,10 @@ INSERT INTO `statuspedido` (`Id`, `Nome`) VALUES
 -- Estrutura da tabela `statusquarto`
 --
 
-DROP TABLE IF EXISTS `statusquarto`;
 CREATE TABLE `statusquarto` (
   `Id` int(11) NOT NULL,
   `Nome` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- RELACIONAMENTOS PARA TABELAS `statusquarto`:
---
 
 --
 -- Extraindo dados da tabela `statusquarto`
@@ -149,7 +123,6 @@ INSERT INTO `statusquarto` (`Id`, `Nome`) VALUES
 -- Estrutura da tabela `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `Id` int(11) NOT NULL,
   `Nome` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -160,18 +133,14 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- RELACIONAMENTOS PARA TABELAS `usuario`:
---
-
---
 -- Extraindo dados da tabela `usuario`
 --
 
 INSERT INTO `usuario` (`Id`, `Nome`, `CPF`, `Login`, `Senha`, `Admin`) VALUES
-(1, 'Teste', '111.111.111-11', 'teste', '123', 1),
-(2, 'bolinho', '123.456.789-10', 'bolinho@email.com', '1234', 0),
-(4, 'gabi', '098765', 'gabi@email.com', '098', 0),
-(5, 'Alerrandro Tomé', '023.023.023-02', 'alerrandro@gmail.com', 'teste', 1);
+(4, 'gabi', '098765', 'gabi@email.com', '098', 1),
+(5, 'Ana', '123.456.789-10', 'ana@email.com', 'ana123', 0),
+(6, 'Adriely', '123.456.789-22', 'adriely@email.com', 'adriely22', 0),
+(7, 'Alerrandro', '123.456.789-23', 'alerrandro@email.com', 'alerrandro23', 0);
 
 --
 -- Índices para tabelas despejadas
@@ -219,19 +188,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `quarto`
 --
 ALTER TABLE `quarto`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `statuspedido`
 --
 ALTER TABLE `statuspedido`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `statusquarto`
@@ -243,7 +212,7 @@ ALTER TABLE `statusquarto`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para despejos de tabelas
